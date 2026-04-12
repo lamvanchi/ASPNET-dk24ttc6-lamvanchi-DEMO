@@ -1,41 +1,11 @@
-# ASPNET-DK24TTC6-lamvanchi-DEMO
+# Apple Store - Project
 
-This is a demonstration repository for the ASPNET-DK24TTC6 course.
-
-## Overview
-
-This project serves as a sample ASP.NET application for educational purposes.
-
-## Getting Started
-
-### Prerequisites
-
-- .NET SDK
-- Visual Studio or Visual Studio Code
-
-### Installation
-
-1. Clone the repository
-2. Navigate to the project directory
-3. Run `dotnet restore`
-4. Run `dotnet build`
-
-### Running the Application
-
-```bash
-dotnet run
-```
-
-## Project Structure
-
-- `src/` - Source code
-- `tests/` - Test files
-- `docs/` - Documentation
-
-## Contributing
-
-Feel free to submit issues and enhancement requests.
-
-## License
-
-This project is provided for educational purposes.
+## 📋 Mục lục
+1. [Giới thiệu project](#giới-thiệu-project)
+2. [Cấu trúc-project](#cấu-trúc-project)
+3. [Tài khoản đăng nhập](#tài-khoản-đăng-nhập)
+4. [Chức năng từng trang](#chức-năng-từng-trang)
+5. [Cơ sở dữ liệu](#cơ-sở-dữ-liệu)
+6. [Hướng dẫn cài đặt](#hướng-dẫn-cài-đặt)
+7. [API Endpoints](#api-endpoints)
+8. [Troubleshooting](#troubleshooting)
