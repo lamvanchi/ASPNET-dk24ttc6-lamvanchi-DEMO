@@ -1,4 +1,4 @@
-# Apple Store - Project
+# Apple Shop - Project
 
 ## Mục lục :
 1. [Giới thiệu project](#giới-thiệu-project)
