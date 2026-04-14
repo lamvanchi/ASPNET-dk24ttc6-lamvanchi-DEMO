@@ -48,3 +48,14 @@ AppleStoreWeb/
 ├── ViewModels/            # View models
 ├── wwwroot/               # Static files
 └── Migrations/            # Database migrations
+##### Tài khoản đăng nhập
+
+###### Tài khoản Admin:
+- **Email:** `admin@applestore.com`
+- **Mật khẩu:** `AdminShop@123`
+- **Quyền:** Administrator
+
+######## Tài khoản khách hàng mẫu:
+- **Email:** `customer@example.com`
+- **Mật khẩu:** `Guest@123456`
+- **Quyền:** Mua sắm, xem đơn hàng
