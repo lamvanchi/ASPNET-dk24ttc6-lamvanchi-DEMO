@@ -59,8 +59,8 @@ AppleStoreWeb/
 - **Email:** `customer@example.com`
 - **Mật khẩu:** `Guest@123456`
 - **Quyền:** Mua sắm, xem đơn hàng
-######### Chức năng từng trang
 
+######### Chức năng từng trang :
 1. Trang chủ (`/`)
 - Hiển thị 8 sản phẩm nổi bật
 - Navigation menu
