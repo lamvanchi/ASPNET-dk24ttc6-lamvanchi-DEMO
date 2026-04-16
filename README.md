@@ -65,3 +65,12 @@ AppleStoreWeb/
 - Hiển thị 8 sản phẩm nổi bật
 - Navigation menu
 - Banner giới thiệu
+########## 2. Danh sách sản phẩm (`/Products`)
+- Hiển thị tất cả sản phẩm Apple
+- **Bộ lọc nâng cao:**
+  - Theo danh mục (iPhone, iPad, Mac)
+  - Theo thương hiệu
+  - Theo khoảng giá
+  - Theo dung lượng lưu trữ
+  - Theo màu sắc
+- Tìm kiếm AJAX
