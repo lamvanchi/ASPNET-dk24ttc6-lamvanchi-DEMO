@@ -48,26 +48,26 @@ AppleStoreWeb/
 ├── ViewModels/            # View models
 ├── wwwroot/               # Static files
 └── Migrations/            # Database migrations
-##  Tài khoản đăng nhập
+##Tài khoản đăng nhập
 
-### Tài khoản Admin:
+###Tài khoản Admin:
 - **Email:** `admin@applestore.com`
 - **Mật khẩu:** `AppleAdmin@2025`
 - **Quyền:** Quản trị toàn bộ hệ thống
 
-### Tài khoản khách hàng mẫu:
+###Tài khoản khách hàng mẫu:
 - **Email:** `customer@example.com`
 - **Mật khẩu:** `Customer@123456`
 - **Quyền:** Mua sắm, xem đơn hàng
 
-##  Chức năng từng trang
+##Chức năng từng trang
 
-### 1. Trang chủ (`/`)
+###1. Trang chủ (`/`)
 - Hiển thị 8 sản phẩm nổi bật
 - Navigation menu
 - Banner giới thiệu
 
-### 2. Danh sách sản phẩm (`/Products`)
+###2. Danh sách sản phẩm (`/Products`)
 - Hiển thị tất cả sản phẩm Apple
 - **Bộ lọc nâng cao:**
   - Theo danh mục (iPhone, iPad, Mac)
@@ -77,13 +77,13 @@ AppleStoreWeb/
   - Theo màu sắc
 - Tìm kiếm AJAX
 
-### 3. Chi tiết sản phẩm (`/Products/Details/{id}`)
+###3. Chi tiết sản phẩm (`/Products/Details/{id}`)
 - Thông tin chi tiết sản phẩm
 - Hình ảnh, thông số kỹ thuật
 - Lựa chọn dung lượng và màu sắc
 - Thêm vào giỏ hàng
 
-### 4. Giỏ hàng (`/Cart`)
+###4. Giỏ hàng (`/Cart`)
 - Hiển thị sản phẩm đã chọn
 - Cập nhật số lượng
 - Xóa sản phẩm
