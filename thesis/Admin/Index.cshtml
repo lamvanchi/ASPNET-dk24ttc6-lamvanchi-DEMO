@@ -1,0 +1,103 @@
+@model AppleStoreWeb.Models.WebsiteStats
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<div class="container mt-4">
+
+    <h2 class="mb-4">Dashboard</h2>
+
+    <div class="row mb-4">
+        <div class="col-md-3">
+            <div class="card p-3">
+                <h6>Tổng sản phẩm</h6>
+                <h4>@Model.TotalProducts</h4>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card p-3">
+                <h6>Tổng đơn hàng</h6>
+                <h4>@Model.TotalOrders</h4>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card p-3">
+                <h6>Khách hàng</h6>
+                <h4>@Model.TotalCustomers</h4>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card p-3">
+                <h6>Doanh thu</h6>
+                <h4>@Model.TotalRevenue.ToString("N0") ₫</h4>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <div class="card p-3">
+                <h6>Hôm nay</h6>
+                <p>Đơn hàng: @Model.TodayOrders</p>
+                <p>Doanh thu: @Model.TodayRevenue.ToString("N0") ₫</p>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card p-3">
+                <h6>Hoạt động</h6>
+                <p>Online: @Model.OnlineUsers</p>
+                <p>Tỷ lệ chuyển đổi: @Model.ConversionRate%</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="card p-3 mb-4">
+        <h5>Đơn hàng gần đây</h5>
+
+        @if (ViewBag.RecentOrders != null && ((IEnumerable<dynamic>)ViewBag.RecentOrders).Any())
+        {
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Mã</th>
+                            <th>Khách</th>
+                            <th>Ngày</th>
+                            <th>Tổng</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    @foreach (var o in (IEnumerable<dynamic>)ViewBag.RecentOrders)
+                    {
+                                <tr>
+                                    <td>@o.Id.Substring(0, 6)</td>
+                                    <td>@o.UserName</td>
+                                    <td>@o.CreatedAt.ToString("dd/MM")</td>
+                                    <td>@o.Total.ToString("N0") ₫</td>
+                                </tr>
+                    }
+                    </tbody>
+                </table>
+        }
+        else
+        {
+                <p>Không có dữ liệu</p>
+        }
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+            <a href="@Url.Action("Products")" class="btn btn-primary w-100 mb-2">Sản phẩm</a>
+        </div>
+        <div class="col-md-4">
+            <a href="@Url.Action("Orders")" class="btn btn-success w-100 mb-2">Đơn hàng</a>
+        </div>
+        <div class="col-md-4">
+            <a href="@Url.Action("Customers")" class="btn btn-info w-100 mb-2">Khách hàng</a>
+        </div>
+    </div>
+
+</div>
