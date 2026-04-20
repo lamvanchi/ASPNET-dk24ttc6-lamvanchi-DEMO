@@ -1,0 +1,81 @@
+@model IEnumerable<AppleStoreWeb.Models.Order>
+@{
+    ViewData["Title"] = "Đơn hàng";
+}
+
+<div class="container mt-4">
+
+    <h5 class="mb-3">Đơn hàng của tôi</h5>
+
+    @if (Model.Any())
+    {
+            <div class="row">
+
+            @foreach (var order in Model)
+            {
+                        <div class="col-md-6 col-lg-4 mb-3">
+
+                            <div class="card shadow-sm">
+                                <div class="card-body">
+
+                                    <div class="d-flex justify-content-between mb-2">
+                                        <strong>#@order.Id.Substring(0, 8)</strong>
+
+                                @if (order.Status == "pending")
+                                {
+                                                <span class="badge bg-secondary">Chờ</span>
+                                }
+                                else if (order.Status == "confirmed")
+                                {
+                                                <span class="badge bg-primary">Xác nhận</span>
+                                }
+                                else if (order.Status == "shipping")
+                                {
+                                                <span class="badge bg-dark">Đang giao</span>
+                                }
+                                else if (order.Status == "delivered")
+                                {
+                                                <span class="badge bg-success">Hoàn tất</span>
+                                }
+                                    </div>
+
+                                    <div class="small text-muted mb-1">
+                                @order.CreatedAt.ToString("dd/MM/yyyy")
+                                    </div>
+
+                                    <div class="small mb-2">
+                                @order.Items.Count sản phẩm
+                                    </div>
+
+                                    <div class="fw-bold text-danger mb-3">
+                                @order.Total.ToString("N0") ₫
+                                    </div>
+
+                                    <a href="@Url.Action("Details", new { id = order.Id })"
+                                       class="btn btn-dark btn-sm w-100">
+                                        Xem
+                                    </a>
+
+                                </div>
+                            </div>
+
+                        </div>
+            }
+
+            </div>
+    }
+    else
+    {
+            <div class="text-center py-5">
+
+                <div class="text-muted mb-2">Chưa có đơn</div>
+
+                <a href="@Url.Action("Index", "Products")"
+                   class="btn btn-dark">
+                    Mua ngay
+                </a>
+
+            </div>
+    }
+
+</div>
