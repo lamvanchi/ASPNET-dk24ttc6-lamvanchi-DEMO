@@ -48,7 +48,7 @@ AppleStoreWeb/
 ├── ViewModels/            # View models
 ├── wwwroot/               # Static files
 └── Migrations/            # Database migrations
-## 🔑 Tài khoản đăng nhập
+## Tài khoản đăng nhập
 
 ### Tài khoản Admin:
 - **Email:** `admin@applestore.com`
@@ -60,7 +60,7 @@ AppleStoreWeb/
 - **Mật khẩu:** `Customer@123456`
 - **Quyền:** Mua sắm, xem đơn hàng
 
-## 🌐 Chức năng từng trang
+## Chức năng từng trang
 
 ### 1. Trang chủ (`/`)
 - Hiển thị 8 sản phẩm nổi bật
