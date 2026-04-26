@@ -234,8 +234,8 @@ Nếu gặp vấn đề, hãy kiểm tra:
 3. Tài khoản admin đã được tạo chưa
 
 ---
-Sinh viên thực hiện: Lâm Văn Chỉ
-Số điện thoại: 0942 473 373  
-Email: lamchi93@gmail.com  
-Giảng viên hướng dẫn: TS. Đoàn Phước Miên  
-Thời gian thực hiện: Tháng 3 – 5/2026
+- Sinh viên thực hiện: Lâm Văn Chỉ
+- Số điện thoại: 0942 473 373  
+- Email: lamchi93@gmail.com  
+- Giảng viên hướng dẫn: TS. Đoàn Phước Miên  
+- Thời gian thực hiện: Tháng 3 – 5/2026
