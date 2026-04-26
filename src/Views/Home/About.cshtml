@@ -1,0 +1,79 @@
+@{
+    ViewData["Title"] = "Giới thiệu";
+}
+
+<div class="container py-5 text-white">
+
+    <div class="text-center mb-5">
+        <h1 class="fw-bold display-4 text-white">Apple Shop</h1>
+        <p class="text-light fs-5">Đơn giản. Tinh tế. Mạnh mẽ.</p>
+    </div>
+
+
+    <div class="row align-items-center mb-5">
+        <div class="col-lg-6">
+            <h2 class="fw-semibold mb-3 text-white">Think Different.</h2>
+            <p class="text-light">
+                Apple Shop mang đến những sản phẩm Apple chính hãng với trải nghiệm mua sắm hiện đại,
+                tối giản và đáng tin cậy.
+            </p>
+            <p class="text-light">
+                Chúng tôi tập trung vào những điều quan trọng nhất — thiết kế đẹp, hiệu năng mạnh mẽ
+                và trải nghiệm liền mạch.
+            </p>
+        </div>
+    </div>
+
+
+    <div class="text-center mb-5">
+        <h2 class="fw-semibold mb-4 text-white">Designed for you.</h2>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="p-4 shadow-sm rounded-4 h-100 bg-dark border">
+                    <i class="fas fa-certificate fa-2x mb-3 text-white"></i>
+                    <h5 class="fw-semibold text-white">Authentic</h5>
+                    <p class="text-light small">Sản phẩm chính hãng. An tâm tuyệt đối.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="p-4 shadow-sm rounded-4 h-100 bg-dark border">
+                    <i class="fas fa-shipping-fast fa-2x mb-3 text-white"></i>
+                    <h5 class="fw-semibold text-white">Fast</h5>
+                    <p class="text-light small">Giao nhanh. Đúng lúc.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="p-4 shadow-sm rounded-4 h-100 bg-dark border">
+                    <i class="fas fa-undo fa-2x mb-3 text-white"></i>
+                    <h5 class="fw-semibold text-white">Simple</h5>
+                    <p class="text-light small">Đổi trả dễ dàng. Không rườm rà.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="text-center mb-5">
+        <h2 class="fw-semibold mb-4 text-white">All in one ecosystem.</h2>
+        <div class="row g-3">
+            <div class="col-md-2 col-4"><div class="py-3 rounded-3 bg-dark text-white">iPhone</div></div>
+            <div class="col-md-2 col-4"><div class="py-3 rounded-3 bg-dark text-white">iPad</div></div>
+            <div class="col-md-2 col-4"><div class="py-3 rounded-3 bg-dark text-white">Mac</div></div>
+            <div class="col-md-2 col-4"><div class="py-3 rounded-3 bg-dark text-white">Apple Watch</div></div>
+            <div class="col-md-2 col-4"><div class="py-3 rounded-3 bg-dark text-white">AirPods</div></div>
+            <div class="col-md-2 col-4"><div class="py-3 rounded-3 bg-dark text-white">Accessories</div></div>
+        </div>
+    </div>
+
+    <div class="text-center p-5 rounded-4" style="background: linear-gradient(135deg, #000, #333); color: white;">
+        <h3 class="fw-semibold mb-3">Ready to experience?</h3>
+        <p class="mb-4 text-light">Khám phá thế giới Apple ngay hôm nay.</p>
+        <a href="@Url.Action("Contact")" class="btn btn-light me-2 px-4">
+            <i class="fas fa-envelope me-2"></i>Contact
+        </a>
+        <a href="@Url.Action("Index", "Products")" class="btn btn-outline-light px-4">
+            <i class="fas fa-shopping-bag me-2"></i>Shop now
+        </a>
+    </div>
+
+</div>

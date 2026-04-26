@@ -1,0 +1,279 @@
+@model AppleStoreWeb.Models.Product
+
+@{
+    ViewData["Title"] = Model.Name;
+
+    var images = string.IsNullOrEmpty(Model.Images)
+        ? new string[0]
+        : System.Text.Json.JsonSerializer.Deserialize<string[]>(Model.Images) ?? new string[0];
+
+    var storageOptions = string.IsNullOrEmpty(Model.StorageOptions)
+        ? new string[0]
+        : System.Text.Json.JsonSerializer.Deserialize<string[]>(Model.StorageOptions) ?? new string[0];
+
+    var colors = string.IsNullOrEmpty(Model.Colors)
+        ? new string[0]
+        : System.Text.Json.JsonSerializer.Deserialize<string[]>(Model.Colors) ?? new string[0];
+}
+
+<div class="container py-5 text-white">
+
+    <div class="row g-5">
+
+        <!-- IMAGE -->
+        <div class="col-lg-6">
+
+            @if (images.Length > 0)
+            {
+                <div id="productCarousel" class="carousel slide glass p-3 rounded-4">
+                    <div class="carousel-inner">
+                        @for (int i = 0; i < images.Length; i++)
+                        {
+                            <div class="carousel-item @(i == 0 ? "active" : "")">
+                                <img src="@images[i]" class="d-block w-100 img-main">
+                            </div>
+                        }
+                    </div>
+
+                    @if (images.Length > 1)
+                    {
+                        <button class="carousel-control-prev" type="button" data-bs-target="#productCarousel" data-bs-slide="prev"></button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#productCarousel" data-bs-slide="next"></button>
+                    }
+                </div>
+
+                @if (images.Length > 1)
+                {
+                    <div class="d-flex mt-3 gap-2">
+                        @for (int i = 0; i < Math.Min(images.Length, 5); i++)
+                        {
+                            <img src="@images[i]" class="thumb" onclick="changeMainImage(@i)">
+                        }
+                    </div>
+                }
+            }
+            else
+            {
+                <img src="/images/placeholder.jpg" class="img-fluid">
+            }
+
+        </div>
+
+        <!-- INFO -->
+        <div class="col-lg-6">
+
+            <h2 class="fw-bold mb-2">@Model.Name</h2>
+            <div class="text-secondary mb-3">@Model.Brand</div>
+
+            <div class="price mb-3">
+                @Model.Price.ToString("N0") ₫
+            </div>
+
+            @if (Model.InStock)
+            {
+                <div class="badge bg-success mb-3">Còn hàng</div>
+            }
+            else
+            {
+                <div class="badge bg-secondary mb-3">Hết hàng</div>
+            }
+
+            <p class="text-secondary">@Model.Description</p>
+
+            <form id="addToCartForm">
+                @Html.AntiForgeryToken()
+                <input type="hidden" id="productId" value="@Model.Id">
+
+                <!-- STORAGE -->
+                @if (storageOptions.Length > 0)
+                {
+                    <div class="mb-3">
+                        <div class="label">Dung lượng</div>
+                        @foreach (var s in storageOptions)
+                        {
+                            <input type="radio" class="btn-check" name="storageOption" id="s-@s" value="@s">
+                            <label class="btn btn-outline-light option" for="s-@s">@s</label>
+                        }
+                    </div>
+                }
+
+                <!-- COLOR -->
+                @if (colors.Length > 0)
+                {
+                    <div class="mb-3">
+                        <div class="label">Màu</div>
+                        @foreach (var c in colors)
+                        {
+                            <input type="radio" class="btn-check" name="color" id="c-@c" value="@c">
+                            <label class="btn btn-outline-light option" for="c-@c">@c</label>
+                        }
+                    </div>
+                }
+
+                <!-- QUANTITY -->
+                <div class="mb-4">
+                    <div class="label">Số lượng</div>
+                    <div class="qty-box">
+                        <button type="button" onclick="changeQuantity(-1)">-</button>
+                        <input type="number" id="quantity" value="1" min="1">
+                        <button type="button" onclick="changeQuantity(1)">+</button>
+                    </div>
+                </div>
+
+                @if (Model.InStock)
+                {
+                    <button type="submit" class="btn btn-glow w-100">
+                        🛒 Thêm vào giỏ hàng
+                    </button>
+                }
+                else
+                {
+                    <button class="btn btn-secondary w-100" disabled>Hết hàng</button>
+                }
+
+            </form>
+
+        </div>
+
+    </div>
+
+    <!-- DESCRIPTION -->
+    <div class="mt-5 glass p-4 rounded-4">
+        <h5>Mô tả sản phẩm</h5>
+        <p class="text-secondary">@Model.Description</p>
+    </div>
+
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+
+        const form = document.getElementById("addToCartForm");
+
+        if (!form) return;
+
+        form.addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            let id = document.getElementById("productId").value;
+            let qty = document.getElementById("quantity").value;
+            let storage = document.querySelector('input[name="storageOption"]:checked')?.value;
+            let color = document.querySelector('input[name="color"]:checked')?.value;
+
+            if (!storage) return alert("Chọn dung lượng");
+            if (!color) return alert("Chọn màu");
+
+            let formData = new FormData();
+            formData.append("productId", id);
+            formData.append("quantity", qty);
+            formData.append("storageOption", storage);
+            formData.append("color", color);
+
+            // TOKEN
+            let token = document.querySelector('input[name="__RequestVerificationToken"]');
+            if (token) {
+                formData.append("__RequestVerificationToken", token.value);
+            }
+
+            fetch("/Cart/AddToCart", {
+                method: "POST",
+                body: formData
+            })
+            .then(res => {
+                if (!res.ok) throw new Error("HTTP " + res.status);
+                return res.json();
+            })
+            .then(data => {
+                if (data.success) {
+                    alert(data.message || "Đã thêm vào giỏ");
+
+                    if (data.cartCount !== undefined) {
+                        let el = document.getElementById("cart-count");
+                        if (el) el.innerText = data.cartCount;
+                    }
+                } else {
+                    alert(data.message || "Thêm thất bại");
+                }
+            })
+            .catch(err => {
+                console.error(err);
+                alert("Lỗi: " + err.message);
+            });
+        });
+
+    });
+</script>
+<style>
+    body {
+        background: #0b0b0b;
+    }
+
+    .glass {
+        background: rgba(255,255,255,0.05);
+        backdrop-filter: blur(20px);
+    }
+
+    .img-main {
+        height: 380px;
+        object-fit: contain;
+    }
+
+    .thumb {
+        height: 60px;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: 0.2s;
+    }
+
+        .thumb:hover {
+            transform: scale(1.1);
+        }
+
+    .price {
+        font-size: 28px;
+        font-weight: bold;
+        color: #ff3b5c;
+    }
+
+    .label {
+        font-size: 13px;
+        margin-bottom: 5px;
+    }
+
+    .option {
+        margin: 4px;
+        border-radius: 20px;
+    }
+
+    .qty-box {
+        display: flex;
+        width: 120px;
+    }
+
+        .qty-box button {
+            flex: 1;
+            background: black;
+            color: white;
+            border: 1px solid #333;
+        }
+
+        .qty-box input {
+            width: 40px;
+            text-align: center;
+            background: black;
+            color: white;
+            border: 1px solid #333;
+        }
+
+    .btn-glow {
+        background: linear-gradient(135deg, #6366f1, #ec4899);
+        border: none;
+        color: white;
+        padding: 10px;
+        border-radius: 12px;
+    }
+
+        .btn-glow:hover {
+            opacity: 0.9;
+        }
+</style>

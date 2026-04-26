@@ -1,0 +1,106 @@
+@model AppleStoreWeb.Models.Product
+
+@{
+    ViewData["Title"] = "Thêm sản phẩm";
+}
+
+<div class="container mt-4">
+
+    <h3 class="mb-4">Thêm sản phẩm</h3>
+
+    <form method="post" enctype="multipart/form-data">
+
+        @Html.AntiForgeryToken()
+
+        <div class="row">
+
+            <div class="col-md-6 mb-3">
+                <label>Tên sản phẩm</label>
+                <input asp-for="Name" class="form-control" required />
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <label>Thương hiệu</label>
+                <input asp-for="Brand" class="form-control" />
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <label>Danh mục</label>
+                <input asp-for="Category" class="form-control" />
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <label>Loại sản phẩm</label>
+                <input asp-for="ProductType" class="form-control" />
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <label>Giá</label>
+                <input asp-for="Price" class="form-control" type="number" required />
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <label>Giá gốc</label>
+                <input asp-for="OriginalPrice" class="form-control" type="number" />
+            </div>
+
+            <div class="col-12 mb-3">
+                <label>Mô tả</label>
+                <textarea asp-for="Description" class="form-control"></textarea>
+            </div>
+
+            <!-- UPLOAD ẢNH -->
+            <div class="col-12 mb-3">
+                <label>Upload ảnh</label>
+                <input type="file" name="ImageFiles" multiple class="form-control" />
+            </div>
+
+            <!-- STORAGE -->
+            <div class="col-md-6 mb-3">
+                <label>Dung lượng</label>
+                <select name="StorageOptions" multiple class="form-select">
+                    <option>128GB</option>
+                    <option>256GB</option>
+                    <option>512GB</option>
+                    <option>1TB</option>
+                </select>
+            </div>
+
+            <!-- COLORS -->
+            <div class="col-md-6 mb-3">
+                <label>Màu sắc</label>
+                <select name="Colors" multiple class="form-select">
+                    <option>Black</option>
+                    <option>White</option>
+                    <option>Gold</option>
+                    <option>Blue</option>
+                    <option>Space Orange</option>
+                </select>
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <label>Rating</label>
+                <input asp-for="Rating" class="form-control" type="number" step="0.1" value="5" />
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <label>Reviews</label>
+                <input asp-for="Reviews" class="form-control" type="number" value="0" />
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <label>Trạng thái</label>
+                <select asp-for="InStock" class="form-select">
+                    <option value="true">Còn hàng</option>
+                    <option value="false">Hết hàng</option>
+                </select>
+            </div>
+
+        </div>
+
+        <button class="btn btn-dark">Lưu</button>
+        <a href="@Url.Action("Index")" class="btn btn-secondary">Hủy</a>
+
+    </form>
+
+</div>

@@ -1,0 +1,58 @@
+@model IEnumerable<AppleStoreWeb.Models.Product>
+@{
+    ViewData["Title"] = "Quản lý sản phẩm";
+}
+
+<div class="container mt-4">
+
+    <div class="d-flex justify-content-between mb-3">
+        <h3>Quản lý sản phẩm</h3>
+        <a href="@Url.Action("Index")" class="btn btn-secondary">Dashboard</a>
+    </div>
+
+    <a href="@Url.Action("Create")" class="btn btn-primary mb-3">Thêm sản phẩm</a>
+
+    @if (Model.Any())
+    {
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Hình</th>
+                        <th>Tên</th>
+                        <th>Hãng</th>
+                        <th>Danh mục</th>
+                        <th>Giá</th>
+                        <th>Tồn kho</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                @foreach (var p in Model)
+                {
+                    var images = System.Text.Json.JsonSerializer.Deserialize<string[]>(p.Images);
+                    var img = images?.FirstOrDefault() ?? "/images/placeholder.jpg";
+
+                            <tr>
+                                <td>
+                                    <img src="@img" style="width:50px;height:50px;object-fit:cover;">
+                                </td>
+                                <td>@p.Name</td>
+                                <td>@p.Brand</td>
+                                <td>@p.Category</td>
+                                <td>@p.Price.ToString("N0") ₫</td>
+                                <td>@(p.InStock ? "Còn hàng" : "Hết hàng")</td>
+                                <td>
+                                    <a href="@Url.Action("Edit", new { id = p.Id })" class="btn btn-sm btn-warning">Sửa</a>
+                                    <a href="@Url.Action("Delete", new { id = p.Id })" class="btn btn-sm btn-danger">Xóa</a>
+                                </td>
+                            </tr>
+                }
+                </tbody>
+            </table>
+    }
+    else
+    {
+            <p>Không có sản phẩm</p>
+    }
+
+</div>

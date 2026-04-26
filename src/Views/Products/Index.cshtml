@@ -1,0 +1,207 @@
+@model IEnumerable<AppleStoreWeb.Models.Product>
+
+@{
+    ViewData["Title"] = "Sản phẩm";
+    var filter = ViewBag.Filter as AppleStoreWeb.Models.FilterState;
+    var brands = ViewBag.Brands as List<string>;
+}
+
+<div class="container py-4">
+
+    <!-- HEADER -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="fw-bold">Tất cả sản phẩm</h2>
+
+        @if (User.IsInRole("admin"))
+        {
+            <a href="@Url.Action("Create")" class="btn btn-success">
+                <i class="fas fa-plus me-2"></i>Thêm sản phẩm
+            </a>
+        }
+    </div>
+
+    <div class="row">
+
+        <!-- FILTER -->
+        <div class="col-lg-3 mb-4">
+            <form method="get">
+
+                <input type="text" class="form-control mb-2"
+                       name="filter.Search"
+                       value="@filter?.Search"
+                       placeholder="Tìm kiếm..." />
+
+                <select class="form-select mb-2" name="filter.Brand">
+                    <option value="">Tất cả hãng</option>
+                    @if (brands != null)
+                    {
+                        foreach (var b in brands)
+                        {
+                            <option value="@b" selected="@(filter?.Brand == b)">
+                                @b
+                            </option>
+                        }
+                    }
+                </select>
+
+                <button class="btn btn-dark w-100">Lọc</button>
+            </form>
+        </div>
+
+        <!-- PRODUCTS -->
+        <div class="col-lg-9">
+
+            <p class="text-white">
+                @(Model?.Count() ?? 0) sản phẩm
+            </p>
+
+            @if (Model != null && Model.Any())
+            {
+                <div class="row g-4">
+
+                    @foreach (var product in Model)
+                    {
+                        string[] images = Array.Empty<string>();
+
+                        if (!string.IsNullOrEmpty(product.Images))
+                        {
+                            try
+                            {
+                                images = System.Text.Json.JsonSerializer
+                                .Deserialize<string[]>(product.Images)
+                                ?? Array.Empty<string>();
+                            }
+                            catch { }
+                        }
+
+                        var img = images.FirstOrDefault() ?? "/images/no-image.png";
+
+                        <div class="col-md-4">
+                            <div class="card h-100 shadow-sm position-relative">
+
+                                @if (product.OriginalPrice.HasValue
+                               && product.OriginalPrice.Value > 0
+                               && product.OriginalPrice.Value > product.Price)
+                                {
+                                    var discount =
+                                    (product.OriginalPrice.Value - product.Price)
+                                    / product.OriginalPrice.Value * 100;
+
+                                    <span class="badge bg-danger position-absolute m-2">
+                                        -@discount.ToString("0")%
+                                    </span>
+                                }
+
+                                <img src="@img"
+                                     class="card-img-top p-3"
+                                     style="height:200px;object-fit:contain"
+                                     onerror="this.src='/images/no-image.png'" />
+
+                                <div class="card-body d-flex flex-column">
+
+                                    <h6>@(product.Name ?? "Sản phẩm")</h6>
+
+                                    <small class="text-white">
+                                        @(product.Category ?? "")
+                                    </small>
+
+                                    <div class="mt-2">
+                                        ⭐ @string.Format("{0:0.0}", product.Rating)
+                                        <span class="text-white">
+                                            (@product.Reviews)
+                                        </span>
+                                    </div>
+
+                                    <div class="mt-auto">
+
+                                        @if (product.OriginalPrice.HasValue
+                                       && product.OriginalPrice.Value > product.Price)
+                                        {
+                                            <div class="text-white text-decoration-line-through">
+                                                @string.Format("{0:N0}", product.OriginalPrice.Value) ₫
+                                            </div>
+                                        }
+
+                                        <div class="fw-bold text-danger">
+                                            @string.Format("{0:N0}", product.Price) ₫
+                                        </div>
+                                    </div>
+
+                                    <!-- ACTION -->
+                                    <div class="mt-3 d-flex gap-2">
+
+                                        <a href="/Products/Details/@product.Id"
+                                           class="btn btn-dark w-100">
+                                            Xem
+                                        </a>
+
+                                        <button class="btn btn-primary w-100"
+                                                onclick="addToCart('@product.Id')">
+                                            Mua
+                                        </button>
+
+                                    </div>
+
+                                    <!-- DELETE (ONLY ADMIN) -->
+                                    @if (User.IsInRole("admin"))
+                                    {
+                                        <form method="post"
+                                              asp-action="Delete"
+                                              onsubmit="return confirm('Xóa sản phẩm này?');"
+                                              class="mt-2">
+
+                                            @Html.AntiForgeryToken()
+                                            <input type="hidden" name="id" value="@product.Id" />
+
+                                            <button class="btn btn-danger w-100">
+                                                Xóa
+                                            </button>
+                                        </form>
+                                    }
+
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                </div>
+            }
+            else
+            {
+                <div class="text-center py-5">
+                    <h5>Không có sản phẩm</h5>
+                </div>
+            }
+
+        </div>
+    </div>
+</div>
+
+<script>
+    function addToCart(productId) {
+        $.post('/Cart/AddToCart', { productId: productId, quantity: 1 })
+            .done(function (res) {
+                if (res && res.success) {
+
+                    alert("Đã thêm vào giỏ hàng");
+
+                    // 🔥 cập nhật số lượng ngay
+                    updateCartCount();
+
+                } else {
+                    alert("Thất bại");
+                }
+            })
+            .fail(function () {
+                alert("Lỗi server");
+            });
+    }
+
+    function updateCartCount() {
+        $.get('/Cart/GetCartCount', function (data) {
+            if (data && data.count !== undefined) {
+                $('#cart-count').text(data.count);
+            }
+        });
+    }
+</script>
