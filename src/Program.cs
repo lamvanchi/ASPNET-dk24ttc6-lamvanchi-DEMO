@@ -69,9 +69,14 @@ app.MapControllerRoute(
     .WithStaticAssets();
 
 // Seed data
+// Create DB + Migration + Seed
 using (var scope = app.Services.CreateScope())
 {
-    await AppleStoreWeb.Data.SeedData.InitializeAsync(scope.ServiceProvider);
-}
+    var services = scope.ServiceProvider;
 
+    var context = services.GetRequiredService<ApplicationDbContext>();
+    await context.Database.MigrateAsync();   // tạo bảng nếu chưa có
+
+    await AppleStoreWeb.Data.SeedData.InitializeAsync(services);
+}
 app.Run();
