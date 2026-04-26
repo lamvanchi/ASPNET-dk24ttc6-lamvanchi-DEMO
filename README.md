@@ -11,7 +11,7 @@
 
 ##  Giới thiệu dự án
 
-**Apple Shop Web** là website thương mại điện tử chuyên bán các sản phẩm Apple được phát triển bằng ASP.NET Core 9.0.
+**Apple Shop** là website thương mại điện tử chuyên bán các sản phẩm Apple được phát triển bằng ASP.NET Core 9.0.
 
 ### Công nghệ sử dụng:
 - **Backend:** ASP.NET Core 9.0 MVC
