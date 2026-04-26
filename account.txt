@@ -1,0 +1,21 @@
+TÀI KHOẢN ADMIN - APPLE SHOP
+=====================================
+
+Email: admin@appleshop.com
+Mật khẩu: Shopapple@2026
+Vai trò: admin
+
+TÀI KHOẢN Guest
+========================
+
+Email: guest@gmail.com
+Mật khẩu: guest@123456
+Vai trò: Guest
+
+HƯỚNG DẪN ĐĂNG NHẬP
+==================
+1. Truy cập: http://localhost:7130
+2. Nhấn "Đăng nhập" ở góc phải trên
+3. Nhập email và mật khẩu
+4. Admin có thể truy cập /Admin để quản lý
+
