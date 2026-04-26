@@ -1,4 +1,4 @@
-# 🍎 Apple Store Web - Tài liệu tham khảo
+# Apple Store Web - Tài liệu tham khảo
 
 ## 📋 Mục lục
 1. [Giới thiệu dự án](#giới-thiệu-dự-án)
@@ -10,7 +10,7 @@
 7. [API Endpoints](#api-endpoints)
 8. [Troubleshooting](#troubleshooting)
 
-## 🎯 Giới thiệu dự án
+##  Giới thiệu dự án
 
 **Apple Shop Web** là website thương mại điện tử chuyên bán các sản phẩm Apple được phát triển bằng ASP.NET Core 9.0.
 
@@ -21,7 +21,7 @@
 - **Frontend:** Bootstrap 5, jQuery
 - **Icons:** Font Awesome
 
-## 📁 Cấu trúc dự án
+##  Cấu trúc dự án
 
 ```
 AppleStoreWeb/
@@ -51,7 +51,7 @@ AppleStoreWeb/
 └── Migrations/            # Database migrations
 ```
 
-## 🔑 Tài khoản đăng nhập
+##  Tài khoản đăng nhập
 
 ### Tài khoản Admin:
 - **Email:** `admin@appleshop.com`
@@ -63,7 +63,7 @@ AppleStoreWeb/
 - **Mật khẩu:** `guest@123456`
 - **Quyền:** Mua sắm, xem đơn hàng
 
-## 🌐 Chức năng từng trang
+##  Chức năng từng trang
 
 ### 1. Trang chủ (`/`)
 - Hiển thị 4 sản phẩm nổi bật
@@ -204,7 +204,7 @@ POST /Debug/CreateAdmin
 dotnet run --verbosity detailed
 ```
 
-## 📝 Ghi chú phát triển
+##  Ghi chú phát triển
 
 ### Thêm sản phẩm mới:
 1. Thêm vào `SeedData.cs`
@@ -219,14 +219,14 @@ dotnet run --verbosity detailed
 - Cập nhật `appsettings.json`
 - Thêm SMTP settings
 
-## 🔒 Bảo mật
+##  Bảo mật
 
 - Mật khẩu được mã hóa bằng ASP.NET Identity
 - Session timeout: 30 phút
 - CSRF protection được bật
 - SQL Injection protection qua Entity Framework
 
-## 📞 Hỗ trợ
+##  Hỗ trợ
 
 Nếu gặp vấn đề, hãy kiểm tra:
 1. Log trong console
