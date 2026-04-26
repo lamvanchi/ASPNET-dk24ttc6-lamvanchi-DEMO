@@ -1,5 +1,4 @@
-# Apple Store Web - Tài liệu tham khảo
-
+# Apple Shop - Project
 ## 📋 Mục lục
 1. [Giới thiệu dự án](#giới-thiệu-dự-án)
 2. [Cấu trúc dự án](#cấu-trúc-dự-án)
