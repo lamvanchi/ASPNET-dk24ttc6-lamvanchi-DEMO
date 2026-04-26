@@ -23,7 +23,7 @@
 ##  Cấu trúc dự án
 
 ```
-AppleStoreWeb/
+AppleShopWeb/
 ├── Controllers/           # Các controller xử lý logic
 │   ├── HomeController.cs     # Trang chủ
 │   ├── ProductsController.cs # Quản lý sản phẩm
