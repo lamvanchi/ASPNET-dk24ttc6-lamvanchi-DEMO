@@ -1,4 +1,4 @@
-# Techzone - Project
+# AppleShop - Project
 
 ## Mục lục :
 1. [Giới thiệu project](#giới-thiệu-project)
