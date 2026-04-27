@@ -135,7 +135,7 @@ Mobile:
 
 Yêu cầu hệ thống:
 - .NET 9 trở lên  
-- SQLite (có thể nâng cấp lên SQL Server)  
+- SQL
 - Trình duyệt hiện đại  
 
 Tương thích:
